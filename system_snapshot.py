@@ -84,18 +84,24 @@ def storage_info():
             gb_size = float(size_decode)/gb_convert #correct disk size to human readable format
             dsk_size.append(f"{gb_size} GB")
     
-    print(dsk_friend_name)
-    print (dsk_serial_nmbr)
-    print (dsk_type)
-    print (dsk_size)
+    storage_report = ""
+    
+    for name, nmbr, type, size in zip(dsk_friend_name, dsk_serial_nmbr, dsk_type, dsk_size):
+        storage_report += f"""
+                            Disk Name: {name}
+                            Disk Serial Number: {nmbr}
+                            Disk Type: {type}
+                            Disk Size: {size}
+                            """
+    return storage_report
     
 def main():
     print ("---------------- SCRIPT START ----------------")
     print ("Gathering OS information")
     
     osys = platform.platform() #store operating system name
-    #mobo_make, mobo_model, mobo_serial = mobo_info()
-    storage_info()
+    mobo_make, mobo_model, mobo_serial = mobo_info()
+    storage_report = storage_info()
     
 
 if __name__ == "__main__":
