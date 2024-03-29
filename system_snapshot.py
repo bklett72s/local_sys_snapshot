@@ -18,21 +18,21 @@ def mobo_info():
         mobo_serial= ""
         try:
             mobo_make = subprocess.Popen(["powershell.exe",
-                                        "get-wmiobject win32_baseboard | select-object -expandproperty Manufacturer"],
+                                        "Get-WmiObject win32_baseboard | Select-Object -expandproperty Manufacturer"],
                                         stdout=sys.stdout, shell=True).communicate()[0] #grab manufacturer from wmiobject
         except:
             mobo_make = "ERROR: mobo make N/A"
             
         try:
             mobo_model = subprocess.Popen(["powershell.exe",
-                                        "get-wmiobject win32_baseboard | select-object -expandproperty Product"],
+                                        "Get-WmiObject win32_baseboard | Select-Object -expandproperty Product"],
                                         stdout=sys.stdout, shell=True).communicate()[0] #grab model from wmiobject
         except:
             mobo_model = "ERROR: mobo make N/A"
         
         try:
             mobo_serial = subprocess.Popen(["powershell.exe",
-                                        "get-wmiobject win32_baseboard | select-object -expandproperty SerialNumber"],
+                                        "Get-WmiObject win32_baseboard | Select-Object -expandproperty SerialNumber"],
                                         stdout=sys.stdout, shell=True).communicate()[0] #grab serial number from wmiobject
         except:
             mobo_serial = "ERROR: mobo seriel N/A"
