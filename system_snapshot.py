@@ -44,11 +44,12 @@ def mobo_info():
 #gather information on storgae devices within local hardware
 def storage_info():
     #open lists to take in gathered data
-    dsk_friend_name = []
-    dsk_serial_nmbr = []
-    dsk_type = []
-    dsk_size = []
-    gb_convert = 1024**3
+    dsk_friend_name = [] #hold disk name
+    dsk_serial_nmbr = [] #hold serial numbers
+    dsk_type = [] #hold disk type
+    dsk_size = [] #hold disk size
+    gb_convert = 1024**3 #math to convert disk size to human readable format in GB
+    storage_report = "" #blank vairable to hold output message for disk information
     
     dsk_friend_name_raw = subprocess.Popen(["powershell.exe",
                                         "Get-PhysicalDisk | Foreach-Object {write-output $_.FriendlyName}"],
@@ -83,8 +84,6 @@ def storage_info():
             size_decode = size.decode("utf-8")
             gb_size = float(size_decode)/gb_convert #correct disk size to human readable format
             dsk_size.append(f"{gb_size} GB")
-    
-    storage_report = ""
     
     for name, nmbr, type, size in zip(dsk_friend_name, dsk_serial_nmbr, dsk_type, dsk_size):
         storage_report += f"""
